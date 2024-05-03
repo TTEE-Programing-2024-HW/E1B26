@@ -1,9 +1,14 @@
 #include<stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
+#include<conio.h>
+
+void pass(void){
+}
 
 int main(void){
 	
-	int c=1,pw=2024,ipw;
+	int c=1,pw=2024,ipw=0;
+	char ch;
 	
 	printf("System is online\n");
     for(int i=1;i<=20;i++){
@@ -38,6 +43,7 @@ int main(void){
     }
     while(1){
     	printf("Pls enter 4 digits passwor(%d/3)(Hint:2024)\n=>",c);
+    	fflush(stdin);
     	scanf("%d",&ipw);
     	if(ipw==pw){
     		break;
@@ -53,5 +59,51 @@ int main(void){
 	system("PAUSE");
     system("CLS");
     //第一題結束
+    while(1){
+    	printf("/\\/\\/\\/\\/\\/\\/\\/\\/\n");
+    	printf("\\ a.畫出直角三角\\\n");
+    	printf("/ b.顯示乘法表  /\n");
+    	printf("\\ c.結束        \\\n");
+    	printf("/\\/\\/\\/\\/\\/\\/\\/\\/\n=>");
+    	fflush(stdin);
+    	scanf("%c",&ch);
+    	if(ch=='A'||ch=='a'){
+    		system("CLS");
+    		printf("Pls enter a character('a'~'n')\n=>");
+    		while(1){
+    			fflush(stdin);
+    			ch=0;
+    			scanf("%c",&ch);
+    			if(ch>='a'&&ch<='n'){
+    				break;
+				}
+				else{
+					printf("Error! Pls enter a character('a'~'n')\n=>\n");
+				}
+			}
+			for(char i=ch;i>='a';i--){
+				for(int j=i-'a';j>0;j--){
+					printf(" ");
+				}
+				for(char j=i;j<=ch;j++){
+					printf("%c",j);
+				}
+				printf("\n");
+			}
+    		
+    		pass();
+		}
+		else if(ch=='B'||ch=='b'){
+			pass();
+		}
+		else if(ch=='C'||ch=='c'){
+			pass();
+		}
+		else{
+			pass();
+		}
+	}
+    
+    
 	return 0;
 }
