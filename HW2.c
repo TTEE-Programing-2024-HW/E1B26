@@ -10,8 +10,8 @@ int main(void){
 	int c=1,pw=2024,ipw=0,n;
 	char ch;
 	
-	printf("System is online\n");
-    for(int i=1;i<=20;i++){
+	printf("System is online\n");	//顯示時表示程式正常啟動
+    for(int i=1;i<=20;i++){       	//開始顯示個人風格畫面
         for(int j=0;j<i;j++){
             printf(">");
         }
@@ -39,27 +39,27 @@ int main(void){
         for(int j=0;j<(40-i);j++){
             printf("<");
         }
-        printf("\n");
+        printf("\n");				//個人風格畫面結束
     }
-    while(1){
+    while(1){				//進入輸入密碼環節
     	printf("Pls enter 4 digits passwor(%d/3)(Hint:2024)\n=>",c);
     	fflush(stdin);
-    	scanf("%d",&ipw);
+    	scanf("%d",&ipw);	//儲存輸入的密碼
     	if(ipw==pw){
     		break;
 		}
-		else if(c==3){
+		else if(c==3){		//輸錯密碼到第三次時
 			printf("Error password over 3 times\n");
-			system("PAUSE");
 			return 0;
 		}
-		c++;
+		c++;				//累計密碼輸入次數
 	}
-	printf("Log in suceesfully\n");
+	printf("Log in suceesfully\n");  	
 	system("PAUSE");
     system("CLS");
     //第一題結束
     while(1){
+    	//顯示選單
     	printf("/\\/\\/\\/\\/\\/\\/\\/\\/\n");
     	printf("\\ a.畫出直角三角\\\n");
     	printf("/ b.顯示乘法表  /\n");
@@ -70,9 +70,9 @@ int main(void){
     	if(ch=='A'||ch=='a'){
     		system("CLS");
     		printf("Pls enter a character('a'~'n')\n=>");
-    		while(1){
+    		while(1){			//要求輸入A~N之間的迴圈
     			fflush(stdin);
-    			ch=0;
+    			ch=0;			//清空變數
     			scanf("%c",&ch);
     			if(ch>='a'&&ch<='n'){
     				break;
@@ -81,14 +81,15 @@ int main(void){
 					printf("Error! Pls enter a character('a'~'n')\n=>\n");
 				}
 			}
-			for(char i=ch;i>='a';i--){
-				for(int j=i-'a';j>0;j--){
-					printf(" ");
+			
+			for(char i=ch;i>='a';i--){		//讓每一橫排都從i開始，並每排遞減到a
+				for(int j=i-'a';j>0;j--){   //補空格
+					printf("  ");
 				}
-				for(char j=i;j<=ch;j++){
-					printf("%c",j);
+				for(char j=i;j<=ch;j++){	//每一橫排從i開始顯示到輸入的值
+					printf("%c ",j);
 				}
-				printf("\n");
+				printf("\n");				//每一橫排換行
 			}
     		system("PAUSE");
     		system("CLS");
@@ -107,7 +108,7 @@ int main(void){
 					printf("Error! Pls enter a number(1~9)\n=>");
 				}
 			}
-			for(int i=1;i<=n;i++){
+			for(int i=1;i<=n;i++){		//顯示九九乘法表
 				for(int j=1;j<=n;j++){
 					printf("%1d×%1d=%2d ",j,i,i*j);
 				}
@@ -124,10 +125,11 @@ int main(void){
 				ch=0;
 				scanf("%c",&ch);
 				if(ch=='Y'||ch=='y'){
-					return 0;
+					printf("Ok, byebye :>");
+					return 0;		//程式結束
 				}
 				else if(ch=='N'||ch=='n'){
-					break;
+					break;			//跳出並回到顯示表單那裡
 				}
 				else{
 					printf("Error input!\n\'Continue?(y/n):");
@@ -137,6 +139,7 @@ int main(void){
 			pass();
 		}
 		else{
+			printf("Error! Pls enter a,b and c to choose function you want.\n");
 			pass();
 		}
 	}
