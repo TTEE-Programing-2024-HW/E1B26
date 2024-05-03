@@ -7,7 +7,7 @@ void pass(void){
 
 int main(void){
 	
-	int c=1,pw=2024,ipw=0;
+	int c=1,pw=2024,ipw=0,n;
 	char ch;
 	
 	printf("System is online\n");
@@ -90,10 +90,31 @@ int main(void){
 				}
 				printf("\n");
 			}
-    		
+    		system("PAUSE");
+    		system("CLS");
     		pass();
 		}
 		else if(ch=='B'||ch=='b'){
+			printf("Pls enter a number(1~9)\n=>");
+    		while(1){
+    			fflush(stdin);
+    			n=0;
+    			scanf("%d",&n);
+    			if(n>=1&&n<=9){
+    				break;
+				}
+				else{
+					printf("Error! Pls enter a number(1~9)\n=>");
+				}
+			}
+			for(int i=1;i<=n;i++){
+				for(int j=1;j<=n;j++){
+					printf("%1d×%1d=%2d ",j,i,i*j);
+				}
+				printf("\n");
+			}
+    		system("PAUSE");
+    		system("CLS");
 			pass();
 		}
 		else if(ch=='C'||ch=='c'){
