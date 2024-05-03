@@ -118,6 +118,22 @@ int main(void){
 			pass();
 		}
 		else if(ch=='C'||ch=='c'){
+			printf("\'Continue?(y/n):");
+			while(1){
+				fflush(stdin);
+				ch=0;
+				scanf("%c",&ch);
+				if(ch=='Y'||ch=='y'){
+					return 0;
+				}
+				else if(ch=='N'||ch=='n'){
+					break;
+				}
+				else{
+					printf("Error input!\n\'Continue?(y/n):");
+				}
+			}
+			system("CLS");
 			pass();
 		}
 		else{
