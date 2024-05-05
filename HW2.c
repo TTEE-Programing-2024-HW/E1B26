@@ -124,11 +124,11 @@ int main(void){
 				fflush(stdin);
 				ch=0;
 				scanf("%c",&ch);
-				if(ch=='Y'||ch=='y'){
+				if(ch=='N'||ch=='n'){
 					printf("Ok, byebye :>");
 					return 0;		//程式結束
 				}
-				else if(ch=='N'||ch=='n'){
+				else if(ch=='Y'||ch=='y'){
 					break;			//跳出並回到顯示表單那裡
 				}
 				else{
