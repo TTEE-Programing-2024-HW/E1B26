@@ -6,6 +6,48 @@
 void pass(void){
 }
 
+int is_space_square(char arr[10][10]){
+	int count=0;
+	for(int r=1;r<=8;r++){
+		for(int c=1;c<=8;c++){
+			for(int i=0;i<2;i++){
+				for(int j=0;j<2;j++){
+					if(arr[r+i][c+j]=='-'){
+						count++;
+					}
+				}
+			}
+			if(count==4){
+				return 1;
+			}
+			else{
+				count=0;
+			}
+		}
+	}
+	return 0;
+}
+
+int is_space_row(int n,char arr[10][10]){
+	int count=0;
+	for(int r=1;r<=9;r++){
+		for(int c=1;c<=(10-n);c++){
+			for(int i=0;i<n;i++){
+				if(arr[r][c+i]=='-'){
+					count++;
+				}
+			}
+			if(count==n){
+				return 1;
+			}
+			else{
+				count=0;
+			}
+		}
+	}
+	return 0;
+}
+
 void show(char arr[10][10]){
 	for(int r=0;r<10;r++){
 		for(int c=0;c<10;c++){
@@ -102,6 +144,146 @@ int main(void){
     		pass();
 		}
 		else if(ch=='B'||ch=='b'){
+			while(1){
+				int f=0;
+				n=0;
+				printf("How many seats do you need?(1~4)\n=>");
+				fflush(stdin);
+				scanf("%d",&n);
+				if(1<=n&&n<=4){
+					if(1<=n&&n<=3){
+						if(is_space_row(n,seat)==1){
+							while(1){
+								srand(time(NULL));
+								int r=rand()%9+1;
+								int c=rand()%(10-n)+1;
+								int count=0;
+								for(int i=0;i<n;i++){
+									if(seat[r][c+i]=='-'){
+										count++;
+									}
+									else{
+										break;
+									}
+								}
+								if(count==n){
+									for(int i=0;i<n;i++){
+										seat[r][c+i]='@';
+									}
+									show(seat);
+									while(1){
+										printf("Are you satisfied with this system recommendation?(y/n):");
+										ch=0;
+										fflush(stdin);
+										scanf("%c",&ch);
+										if(ch=='Y'||ch=='y'){
+											for(int i=0;i<n;i++){
+												seat[r][c+i]='*';
+											}
+											printf("Fine, thank you for using this reservation system.\n");
+											system("pause");
+											system("cls");
+											f=1;
+											break;
+										}
+										else if(ch=='N'||ch=='n'){
+											for(int i=0;i<n;i++){
+												seat[r][c+i]='-';
+											}
+											printf("Sorry for your dissatisfaction. You can do again or choose by yourself.\n");
+											system("pause");
+											system("cls");
+											f=1;
+											break;
+										}
+										else{
+											printf("Error input!\n");
+										}
+									}
+									if(f==1){
+										break;
+									}
+								}
+							}
+						}
+						else{
+							printf("Sorry, there are no seats left.\n");
+							system("pause");
+							system("cls");
+							f=1;
+						}
+					}
+					else{
+						if(is_space_square(seat)==1){
+							pass();
+						}
+						else if(is_space_row(4,seat)==1){
+							while(1){
+								srand(time(NULL));
+								int r=rand()%9+1;
+								int c=rand()%(10-n)+1;
+								int count=0;
+								for(int i=0;i<n;i++){
+									if(seat[r][c+i]=='-'){
+										count++;
+									}
+									else{
+										break;
+									}
+								}
+								if(count==n){
+									for(int i=0;i<n;i++){
+										seat[r][c+i]='@';
+									}
+									show(seat);
+									while(1){
+										printf("Are you satisfied with this system recommendation?(y/n):");
+										ch=0;
+										fflush(stdin);
+										scanf("%c",&ch);
+										if(ch=='Y'||ch=='y'){
+											for(int i=0;i<n;i++){
+												seat[r][c+i]='*';
+											}
+											printf("Fine, thank you for using this reservation system.\n");
+											system("pause");
+											system("cls");
+											f=1;
+											break;
+										}
+										else if(ch=='N'||ch=='n'){
+											for(int i=0;i<n;i++){
+												seat[r][c+i]='-';
+											}
+											printf("Sorry for your dissatisfaction. You can do again or choose by yourself.\n");
+											system("pause");
+											system("cls");
+											f=1;
+											break;
+										}
+										else{
+											printf("Error input!\n");
+										}
+									}
+									if(f==1){
+										break;
+									}
+								}
+							}
+							pass();
+						}
+						else{
+							printf("Sorry, there are no seats left.\n");
+							system("pause");
+							system("cls");
+							f=1;
+						}
+					}
+				}
+				if(f==1){
+					break;
+				}
+			}
 			pass();
 		}
 		else if(ch=='C'||ch=='c'){
