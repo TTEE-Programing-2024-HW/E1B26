@@ -122,9 +122,15 @@ int main(void){
 			seat[r][c]='-';
 		}
 	}
-	for(int i=0;i<10;i++){
+	int i;
+	while(i!=10){
 		srand(time(NULL)*i);
-		seat[rand()%9+1][rand()%9+1]='*';
+		int r=rand()%9+1,c=rand()%9+1;
+		if(seat[r][c]=='*'){
+			continue;
+		}
+		seat[r][c]='*';
+		i++;
 	}
     
     while(1){
@@ -215,6 +221,63 @@ int main(void){
 					}
 					else{
 						if(is_space_square(seat)==1){
+							while(1){
+								srand(time(NULL));
+								int r=rand()%8+1;
+								int c=rand()%8+1;
+								int count=0;
+								for(int i=0;i<2;i++){
+									for(int j=0;j<2;j++){
+										if(seat[r+i][c+j]=='-'){
+											count++;
+										}
+									}
+								}
+								if(count==4){
+									for(int i=0;i<2;i++){
+										for(int j=0;j<2;j++){
+											seat[r+i][c+j]='@';
+										}
+									}
+									show(seat);
+									while(1){
+										printf("Are you satisfied with this system recommendation?(y/n):");
+										ch=0;
+										fflush(stdin);
+										scanf("%c",&ch);
+										if(ch=='Y'||ch=='y'){
+											for(int i=0;i<2;i++){
+												for(int j=0;j<2;j++){
+													seat[r+i][c+j]='*';
+												}
+											}
+											printf("Fine, thank you for using this reservation system.\n");
+											system("pause");
+											system("cls");
+											f=1;
+											break;
+										}
+										else if(ch=='N'||ch=='n'){
+											for(int i=0;i<2;i++){
+												for(int j=0;j<2;j++){
+													seat[r+i][c+j]='-';
+												}
+											}
+											printf("Sorry for your dissatisfaction. You can do again or choose by yourself.\n");
+											system("pause");
+											system("cls");
+											f=1;
+											break;
+										}
+										else{
+											printf("Error input!\n");
+										}
+									}
+								}
+								if(f==1){
+									break;
+								}
+							}
 							pass();
 						}
 						else if(is_space_row(4,seat)==1){
