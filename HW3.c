@@ -1,11 +1,22 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 #include<conio.h>
 
 void pass(void){
 }
 
+void show(char arr[10][10]){
+	for(int r=0;r<10;r++){
+		for(int c=0;c<10;c++){
+			printf("%c ",arr[r][c]);
+		}
+		printf("\n");
+	}
+}
+
 int main(void){
+	char seat[10][10];
 	
 	int c=1,pw=2024,ipw=0,n;
 	char ch;
@@ -58,6 +69,22 @@ int main(void){
 	system("PAUSE");
     system("CLS");
     //第一題結束
+    
+    seat[0][0]='\\';
+    for(int i=1;i<=9;i++){
+    	seat[i][0]='0'+i;
+    	seat[0][i]='0'+i;
+	}
+	for(int r=1;r<=9;r++){
+		for(int c=1;c<=9;c++){
+			seat[r][c]='-';
+		}
+	}
+	for(int i=0;i<10;i++){
+		srand(time(NULL)*i);
+		seat[rand()%9+1][rand()%9+1]='*';
+	}
+    
     while(1){
     	//顯示選單
     	printf("/\\/\\[Booking System]/\\/\\\n");
@@ -69,6 +96,9 @@ int main(void){
     	fflush(stdin);
     	scanf("%c",&ch);
     	if(ch=='A'||ch=='a'){
+    		show(seat);
+    		system("pause");
+    		system("cls");
     		pass();
 		}
 		else if(ch=='B'||ch=='b'){
@@ -106,8 +136,3 @@ int main(void){
     
 	return 0;
 }
-
-/*
-在這一次的作業中，我認為最難的A選項的製作，因為除了所有字都要靠右要計算空格外，字母的排列也是由右向左遞減，
-其他的部分我覺得都還好，就是這次迴圈多了很多，所以跳出條件都要寫好，不然容易變成無限迴圈。
-*/
