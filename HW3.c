@@ -3,9 +3,11 @@
 #include<time.h>
 #include<conio.h>
 
+// Empty function placeholder
 void pass(void){
 }
 
+// Check if there's a 2x2 square of available seats
 int is_space_square(char arr[10][10]){
 	int count=0;
 	for(int r=1;r<=8;r++){
@@ -28,6 +30,7 @@ int is_space_square(char arr[10][10]){
 	return 0;
 }
 
+// Check if there's a row of 'n' consecutive available seats
 int is_space_row(int n,char arr[10][10]){
 	int count=0;
 	for(int r=1;r<=9;r++){
@@ -48,6 +51,7 @@ int is_space_row(int n,char arr[10][10]){
 	return 0;
 }
 
+// Display the seating arrangement
 void show(char arr[10][10]){
 	for(int r=0;r<10;r++){
 		for(int c=0;c<10;c++){
@@ -92,26 +96,27 @@ int main(void){
         for(int j=0;j<(40-i);j++){
             printf("<");
         }
-        printf("\n");				//個人風格畫面結束
+        printf("\n");
     }
-    while(1){				//進入輸入密碼環節
+	// Password input loop
+    while(1){			
     	printf("Pls enter 4 digits passwor(%d/3)(Hint:2024)\n=>",c);
     	fflush(stdin);
-    	scanf("%d",&ipw);	//儲存輸入的密碼
+    	scanf("%d",&ipw); // Store entered password
     	if(ipw==pw){
     		break;
 		}
-		else if(c==3){		//輸錯密碼到第三次時
+		else if(c==3){		// After three incorrect attempts
 			printf("Error password over 3 times\n");
 			return 0;
 		}
-		c++;				//累計密碼輸入次數
+		c++;				// Increment password attempt counter
 	}
 	printf("Log in suceesfully\n");  	
 	system("PAUSE");
     system("CLS");
-    //第一題結束
     
+    // Initialize seating arrangement
     seat[0][0]='\\';
     for(int i=1;i<=9;i++){
     	seat[i][0]='0'+i;
@@ -134,7 +139,7 @@ int main(void){
 	}
     
     while(1){
-    	//顯示選單
+    	// Main menu loop
     	printf("/\\/\\[Booking System]/\\/\\\n");
     	printf("\\ a.Available seats    /\n");
     	printf("/ b.Arrange for you    \\\n");
@@ -164,6 +169,7 @@ int main(void){
 								int r=rand()%9+1;
 								int c=rand()%(10-n)+1;
 								int count=0;
+								//Confirm that the randomly selected position is empty
 								for(int i=0;i<n;i++){
 									if(seat[r][c+i]=='-'){
 										count++;
@@ -172,11 +178,13 @@ int main(void){
 										break;
 									}
 								}
+								//Mark the @ on the empty seat
 								if(count==n){
 									for(int i=0;i<n;i++){
 										seat[r][c+i]='@';
 									}
 									show(seat);
+									
 									while(1){
 										printf("Are you satisfied with this system recommendation?(y/n):");
 										ch=0;
@@ -382,10 +390,10 @@ int main(void){
 				scanf("%c",&ch);
 				if(ch=='N'||ch=='n'){
 					printf("Ok, byebye :>");
-					return 0;		//程式結束
+					return 0;		//End
 				}
 				else if(ch=='Y'||ch=='y'){
-					break;			//跳出並回到顯示表單那裡
+					break;			//back to menu
 				}
 				else{
 					printf("Error input!\n\'Continue?(y/n):");
