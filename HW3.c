@@ -413,3 +413,5 @@ int main(void){
     
 	return 0;
 }
+/*In this assignment, I found it to be more difficult than the last time, especially the "random" part, because "random" is highly uncertain, 
+so whether it is testing or writing, every factor needs to be considered which also caused my code to become very verbose.*/
