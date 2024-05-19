@@ -350,6 +350,28 @@ int main(void){
 			pass();
 		}
 		else if(ch=='C'||ch=='c'){
+			while(1){
+				int r=0,c=0;
+				printf("Enter the seat number you want to book(1-2)\n=>");
+				fflush(stdin);
+				scanf("%d-%d",&r,&c);
+				if(seat[r][c]=='*'){
+					printf("The seat you selected has been reserved.\n");
+				}
+				else if(1<=r&&r<=9&&1<=c&&c<=9){
+					seat[r][c]='@';
+					show(seat);
+					printf("Please press any key to indicate that the selection is correct.\n");
+					system("pause");
+					system("cls");
+					seat[r][c]='*';
+					break;
+				}
+				else{
+					printf("The input format is wrong. Please re-enter.\n");
+				}
+				
+			}
 			pass();
 		}
 		else if(ch=='D'||ch=='d'){
@@ -374,6 +396,8 @@ int main(void){
 		}
 		else{
 			printf("Error! Pls enter a,b,c and d to choose function you want.\n");
+			system("pause");
+			system("cls");
 			pass();
 		}
 	}
