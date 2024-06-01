@@ -8,6 +8,7 @@ typedef struct{
 	float mat;
 	float phy;
 	float eng;
+	float ave;
 }stu;
 
 // Empty function placeholder
@@ -91,14 +92,41 @@ void Etr(stu** _cls,int* _count){
                 printf("Please enter 0 to 100.\n=>");
             }
 		}
+		(*_cls)[*_count+i].ave=((*_cls)[*_count+i].mat+(*_cls)[*_count+i].phy+(*_cls)[*_count+i].eng)/3.0;
 	}
 	(*_count)+=add;
 }
 
 void Dsp(stu** _cls,int *_count){
-	printf("Name\tID\taverage grade\n");
+	system("cls");
+	printf("%8s%8s%16s\n","Name","ID","average grade");
 	for(int i=0;i<*_count;i++){
-		printf("%s\t%s\t%.1f\n",(*_cls)[i].name,(*_cls)[i].ID,((*_cls)[i].mat+(*_cls)[i].phy+(*_cls)[i].eng)/3.0);
+		printf("%8s%8s%16.1f\n",(*_cls)[i].name,(*_cls)[i].ID,(*_cls)[i].ave);
+	}
+	system("pause");
+	system("cls");
+}
+
+void Srch(stu**_cls,int*_count){
+	char inputname[sizeof((*_cls)->name)];
+	system("cls");
+	printf("Please enter the name you want to search for\n=>");
+	fflush(stdin);
+	fgets(inputname,sizeof((*_cls)->name),stdin);
+	int len=strlen(inputname);
+   	if(len>0&&inputname[len-1] =='\n'){
+	   inputname[len-1] = '\0';
+    }
+    printf("%8s%8s%8s%8s%8s%16s\n","Name","ID","Math","Physics","English","average grade");
+    int situ=0;
+    for(int i=0;i<(*_count);i++){
+    	if(strcmp(inputname,(*_cls)[i].name)==0){
+    		printf("%8s%8s%8.1f%8.1f%8.1f%16.1f\n",(*_cls)[i].name,(*_cls)[i].ID,(*_cls)[i].mat,(*_cls)[i].phy,(*_cls)[i].eng,(*_cls)[i].ave);
+    		situ=1;
+		}
+	}
+	if(situ==0){
+		printf("NO data\n");
 	}
 	system("pause");
 	system("cls");
@@ -187,6 +215,7 @@ int main(void){
 			}
 			case 'C':
     		case 'c':{
+    			Srch(&cls, &count);
     			pass();
 				break;
 			}
