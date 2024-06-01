@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
+// Define a structure for student information
 typedef struct{
 	char name[20];
 	char ID[7];
@@ -15,10 +15,12 @@ typedef struct{
 void pass(void){
 }
 
-void Etr(stu** _cls,int* _count){
+// Function to enter student grades
+void Etr(stu**_cls,int*_count){
 	int add=0,f=0;
 	system("cls");
 	printf("How many students do you want to add(5~10)?\n=>");
+	// Loop to ensure valid number of students
 	while(1){
 		fflush(stdin);
 		scanf("%d",&add);
@@ -29,12 +31,15 @@ void Etr(stu** _cls,int* _count){
 			printf("Please enter a number from 5 to 10\n=>");
 		}
 	}
+	// Allocate or reallocate memory for students
 	stu*temp=(stu*)realloc(*_cls,sizeof(stu)*(*_count+add));
 	if(temp==NULL){
 		printf("Memory addition failed.\n");
 		return;
 	}
 	*_cls=temp;
+	
+	// Loop to input student details
 	for(int i=0;i<add;i++){
 		printf("Please enter the %dth student's name\n=>",i+1);
 		fflush(stdin);
@@ -44,6 +49,8 @@ void Etr(stu** _cls,int* _count){
             (*_cls)[*_count+i].name[len-1] = '\0';
         }
         printf("Please enter the %dth student's ID\n=>",i+1);
+        
+        // Input and validate student ID
         while(1){
         	f=0;
         	fflush(stdin);
@@ -66,6 +73,8 @@ void Etr(stu** _cls,int* _count){
 		}
         fflush(stdin);
         printf("Please enter the %dth student's Math grade\n=>",i+1);
+        
+        // Input and validate Math grade
         while(1){
         	fflush(stdin);
         	if(scanf("%f",&(*_cls)[*_count+i].mat)==1&&0<=(*_cls)[*_count+i].mat&&(*_cls)[*_count+i].mat<=100){
@@ -75,6 +84,7 @@ void Etr(stu** _cls,int* _count){
             }
 		}
         printf("Please enter the %dth student's Physics grade\n=>",i+1);
+        // Input and validate Physics grade
         while(1){
         	fflush(stdin);
         	if(scanf("%f",&(*_cls)[*_count+i].phy)==1&&0<=(*_cls)[*_count+i].phy&&(*_cls)[*_count+i].phy<=100){
@@ -84,6 +94,7 @@ void Etr(stu** _cls,int* _count){
             }
 		}
         printf("Please enter the %dth student's English grade\n=>",i+1);
+        // Input and validate English grade
         while(1){
         	fflush(stdin);
         	if(scanf("%f",&(*_cls)[*_count+i].eng)==1&&0<=(*_cls)[*_count+i].eng&&(*_cls)[*_count+i].eng<=100){
@@ -92,12 +103,15 @@ void Etr(stu** _cls,int* _count){
                 printf("Please enter 0 to 100.\n=>");
             }
 		}
+		// Calculate average grade
 		(*_cls)[*_count+i].ave=((*_cls)[*_count+i].mat+(*_cls)[*_count+i].phy+(*_cls)[*_count+i].eng)/3.0;
 	}
+	// Update student count
 	(*_count)+=add;
 }
 
-void Dsp(stu** _cls,int *_count){
+// Function to display student grades
+void Dsp(stu**_cls,int*_count){
 	system("cls");
 	printf("%8s%8s%16s\n","Name","ID","average grade");
 	for(int i=0;i<*_count;i++){
@@ -107,6 +121,7 @@ void Dsp(stu** _cls,int *_count){
 	system("cls");
 }
 
+// Function to search for a student by name
 void Srch(stu**_cls,int*_count){
 	char inputname[sizeof((*_cls)->name)];
 	system("cls");
@@ -132,13 +147,42 @@ void Srch(stu**_cls,int*_count){
 	system("cls");
 }
 
+// Function to rank students by their average grades
+void Rank(stu**_cls,int*_count){
+	// Allocate memory for ranking students
+    stu*rank=(stu*)malloc(sizeof(stu)*(*_count));
+    if(rank==NULL){
+        printf("Memory allocation failed.\n");
+        return;
+    }
+    for(int i=0;i<*_count;i++){
+        rank[i]=(*_cls)[i];
+    }
+	
+	// Sort students by average grade in descending order
+    for(int i=0;i<*_count-1;i++){
+        for(int j=0;j<*_count-i-1;j++){
+            if(rank[j].ave<rank[j+1].ave){
+                stu temp=rank[j];
+                rank[j]=rank[j+1];
+                rank[j+1]=temp;
+            }
+        }
+    }
+    // Display ranked students
+    Dsp(&rank,&*_count);
+    free(rank);
+    system("pause");
+    system("cls");
+}
+
 int main(void){
 	
 	int c=1,pw=2024,ipw=0,n;
 	char ch;
 	
-	printf("System is online\n");	//顯示時表示程式正常啟動
-    for(int i=1;i<=20;i++){       	//開始顯示個人風格畫面
+	printf("System is online\n");	// Display indicates program start
+    for(int i=1;i<=20;i++){       	// Start displaying personal style screen
         for(int j=0;j<i;j++){
             printf(">");
         }
@@ -187,7 +231,7 @@ int main(void){
     system("CLS");
     
     int count=0;
-    stu* cls=(stu*)malloc(0);//cls 是指向stu結構的單一指針
+    stu* cls=(stu*)malloc(0);// cls is a single pointer pointing to stu structure
     
     while(1){
     	// Main menu loop
@@ -221,11 +265,29 @@ int main(void){
 			}
 			case 'D':
     		case 'd':{
+    			Rank(&cls,&count);
     			pass();
 				break;
 			}
 			case 'E':
     		case 'e':{
+    			char ch;
+				printf("Are you sure you want to exit?(Y/N)\n=>");
+				while(1){
+					fflush(stdin);
+					scanf("%c",&ch);
+					if(ch=='Y'||ch=='y'){
+						printf("Good bye!\n");
+						free(cls);
+						return 0;
+					}
+					else if(ch=='N'||ch=='n'){
+						break;
+					}
+					else{
+						printf("Are you sure you want to exit?(Y/N)\n=>");
+					}
+				}
     			pass();
 				break;
 			}
