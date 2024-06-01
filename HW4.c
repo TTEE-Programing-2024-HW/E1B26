@@ -1,8 +1,98 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
+
+typedef struct{
+	char name[20];
+	char ID[7];
+	int mat;
+	int phy;
+	int eng;
+}stu;
 
 // Empty function placeholder
 void pass(void){
+}
+
+void Etr(stu** _cls,int* _count){
+	int add=0,f=0;
+	system("cls");
+	printf("How many students do you want to add(5~10)?\n=>");
+	while(1){
+		fflush(stdin);
+		scanf("%d",&add);
+		if(1<=add&&add<=10){//Test mode
+			break;
+		}
+		else{
+			printf("Please enter a number from 5 to 10\n=>");
+		}
+	}
+	stu*temp=(stu*)realloc(*_cls,sizeof(stu)*(*_count+add));
+	if(temp==NULL){
+		printf("Memory addition failed.\n");
+		return;
+	}
+	*_cls=temp;
+	for(int i=0;i<add;i++){
+		printf("Please enter the %dth student's name\n=>",i+1);
+		fflush(stdin);
+        fgets((*_cls)[*_count+i].name,sizeof((*_cls)[*_count+i].name),stdin);
+        int len=strlen((*_cls)[*_count+i].name);
+        if(len> 0 && (*_cls)[*_count+i].name[len-1] =='\n'){
+            (*_cls)[*_count+i].name[len-1] = '\0';
+        }
+        printf("Please enter the %dth student's ID\n=>",i+1);
+        while(1){
+        	f=0;
+        	fflush(stdin);
+        	fgets((*_cls)[*_count+i].ID,sizeof((*_cls)[*_count+i].ID),stdin);
+        	len= strlen((*_cls)[*_count+i].ID);
+        	if (len>0 && (*_cls)[*_count + i].ID[len-1]=='\n'){
+            (*_cls)[*_count+i].ID[len-1]='\0';
+			}
+        	for(int j=0;j<sizeof((*_cls)[*_count+i].ID)-1;j++){
+        		if('0'<=(*_cls)[*_count+i].ID[j]&&(*_cls)[*_count+i].ID[j]<='9'){
+        			f++;
+				}
+        	}
+        	if(f==6){
+        		break;
+			}
+			else{
+				printf("Error!\nPlease enter a 6-digit integer\n=>");
+			}
+		}
+        fflush(stdin);
+        printf("Please enter the %dth student's Math grade\n=>",i+1);
+        while(1){
+        	fflush(stdin);
+        	if(scanf("%d",&(*_cls)[*_count+i].mat)==1&&0<=(*_cls)[*_count+i].mat&&(*_cls)[*_count+i].mat<=100){
+                break;
+            } else {
+                printf("Please enter 0 to 100.\n=>");
+            }
+		}
+        printf("Please enter the %dth student's Physics grade\n=>",i+1);
+        while(1){
+        	fflush(stdin);
+        	if(scanf("%d",&(*_cls)[*_count+i].phy)==1&&0<=(*_cls)[*_count+i].phy&&(*_cls)[*_count+i].phy<=100){
+                break;
+            } else {
+                printf("Please enter 0 to 100.\n=>");
+            }
+		}
+        printf("Please enter the %dth student's English grade\n=>",i+1);
+        while(1){
+        	fflush(stdin);
+        	if(scanf("%d",&(*_cls)[*_count+i].eng)==1&&0<=(*_cls)[*_count+i].eng&&(*_cls)[*_count+i].eng<=100){
+                break;
+            } else {
+                printf("Please enter 0 to 100.\n=>");
+            }
+		}
+	}
+	(*_count)+=add;
 }
 
 
@@ -59,6 +149,10 @@ int main(void){
 	printf("Log in suceesfully\n");  	
 	system("PAUSE");
     system("CLS");
+    
+    int count=0;
+    stu* cls=(stu*)malloc(0);//cls 是指向stu結構的單一指針
+    
     while(1){
     	// Main menu loop
     	printf("/\\/\\/\\/\\[Grade System]/\\/\\/\\/\\\n");
@@ -70,6 +164,40 @@ int main(void){
     	printf(" \\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\n=>");
     	fflush(stdin);
     	scanf("%c",&ch);
+    	switch(ch){
+    		case 'A':
+    		case 'a':{
+    			Etr(&cls, &count);
+    			pass();
+				break;
+			}
+			case 'B':
+    		case 'b':{
+    			pass();
+				break;
+			}
+			case 'C':
+    		case 'c':{
+    			pass();
+				break;
+			}
+			case 'D':
+    		case 'd':{
+    			pass();
+				break;
+			}
+			case 'E':
+    		case 'e':{
+    			pass();
+				break;
+			}
+			default:{
+				printf("Error!\nPlease enter A to E\n");
+				system("pause");
+				system("cls");
+				break;
+			}
+		}
     }
     return 0;
 }
