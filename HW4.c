@@ -5,9 +5,9 @@
 typedef struct{
 	char name[20];
 	char ID[7];
-	int mat;
-	int phy;
-	int eng;
+	float mat;
+	float phy;
+	float eng;
 }stu;
 
 // Empty function placeholder
@@ -67,7 +67,7 @@ void Etr(stu** _cls,int* _count){
         printf("Please enter the %dth student's Math grade\n=>",i+1);
         while(1){
         	fflush(stdin);
-        	if(scanf("%d",&(*_cls)[*_count+i].mat)==1&&0<=(*_cls)[*_count+i].mat&&(*_cls)[*_count+i].mat<=100){
+        	if(scanf("%f",&(*_cls)[*_count+i].mat)==1&&0<=(*_cls)[*_count+i].mat&&(*_cls)[*_count+i].mat<=100){
                 break;
             } else {
                 printf("Please enter 0 to 100.\n=>");
@@ -76,7 +76,7 @@ void Etr(stu** _cls,int* _count){
         printf("Please enter the %dth student's Physics grade\n=>",i+1);
         while(1){
         	fflush(stdin);
-        	if(scanf("%d",&(*_cls)[*_count+i].phy)==1&&0<=(*_cls)[*_count+i].phy&&(*_cls)[*_count+i].phy<=100){
+        	if(scanf("%f",&(*_cls)[*_count+i].phy)==1&&0<=(*_cls)[*_count+i].phy&&(*_cls)[*_count+i].phy<=100){
                 break;
             } else {
                 printf("Please enter 0 to 100.\n=>");
@@ -85,7 +85,7 @@ void Etr(stu** _cls,int* _count){
         printf("Please enter the %dth student's English grade\n=>",i+1);
         while(1){
         	fflush(stdin);
-        	if(scanf("%d",&(*_cls)[*_count+i].eng)==1&&0<=(*_cls)[*_count+i].eng&&(*_cls)[*_count+i].eng<=100){
+        	if(scanf("%f",&(*_cls)[*_count+i].eng)==1&&0<=(*_cls)[*_count+i].eng&&(*_cls)[*_count+i].eng<=100){
                 break;
             } else {
                 printf("Please enter 0 to 100.\n=>");
@@ -95,6 +95,14 @@ void Etr(stu** _cls,int* _count){
 	(*_count)+=add;
 }
 
+void Dsp(stu** _cls,int *_count){
+	printf("Name\tID\taverage grade\n");
+	for(int i=0;i<*_count;i++){
+		printf("%s\t%s\t%.1f\n",(*_cls)[i].name,(*_cls)[i].ID,((*_cls)[i].mat+(*_cls)[i].phy+(*_cls)[i].eng)/3.0);
+	}
+	system("pause");
+	system("cls");
+}
 
 int main(void){
 	
@@ -173,6 +181,7 @@ int main(void){
 			}
 			case 'B':
     		case 'b':{
+    			Dsp(&cls, &count);
     			pass();
 				break;
 			}
